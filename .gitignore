@@ -1,0 +1,13 @@
+
+vc2015/.vs/IHAI/v15/.suo
+vc2015/.vs/IHAI/v15/Browse.VC.db
+vc2015/.vs/IHAI/v15/Browse.VC.opendb
+*.ipch
+*.exe
+*.ilk
+*.pdb
+*.obj
+*.log
+*.tlog
+*.res
+*.idb

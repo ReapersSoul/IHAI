@@ -2,7 +2,7 @@
 
 
 
-NeuralNet::NeuralNet(int inputSize,int outputsize, int LCount, int LSize, void(*AFunct)(float))
+NeuralNet::NeuralNet(int inputSize,int outputsize, int LCount, int LSize, float(*AFunct)(float))
 {
 	srand(time(0));
 
@@ -66,6 +66,12 @@ void NeuralNet::setinputs(vector<float> inputs)
 {
 	InputSize = inputs.size();
 	Inputs = inputs;
+}
+
+void NeuralNet::setOutputSize(int num)
+{
+	OutputSize = num;
+	Outputs.resize(OutputSize);
 }
 
 void NeuralNet::setLayerCount(int num)
@@ -146,7 +152,7 @@ void NeuralNet::setLayerSize(int num)
 	}
 }
 
-void NeuralNet::setActFunct(void(*AFunct)(float))
+void NeuralNet::setActFunct(float(*AFunct)(float))
 {
 	ActFunct = AFunct;
 }
@@ -156,18 +162,29 @@ void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> Correc
 	for (int i = 0; i < itterations; i++) {
 		for (int j = 0; j < inputs.size(); j++) {
 
+			InputSize = inputs[j].size();
 			Inputs = inputs[j];
 			
-			for (int y = 0; y < nodes[0].size(); y++) {
-				for (int x = 0; x < Inputs.size(); x++) {
-
-
+			//inputs
+			for (int x = 0; x < InputSize; x++) {
+				for (int y = 0; y < nodes[0].size(); y++) {
+					nodes[0][y]= ActFunct(weights[0][x][y]*Inputs[x] + bias);
 				}
 			}
-
-
-
-			inputs[j]
+			//nodes
+			for (int x = 1; x < nodes.size() - 1; x++) {
+				for (int y = 0; y < nodes[x-1].size(); y++) {
+					for (int z = 0; z < nodes[x].size(); z++) {
+						nodes[x][z] = ActFunct(weights[x][y][z] * nodes[x - 1][y] + bias);
+					}
+				}
+			}
+			//outputs
+			for (int x = 0; x < nodes[nodes.size()].size(); x++) {
+				for (int y = 0; y < OutputSize; y++) {
+					Outputs[y] = ActFunct(weights[weights.size()][x][y] * nodes[nodes.size()][x] + bias);
+				}
+			}
 
 		}
 	}

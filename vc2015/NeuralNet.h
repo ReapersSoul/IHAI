@@ -7,7 +7,7 @@ float randrange(float min, float max);
 using namespace std;
 class NeuralNet
 {
-public:
+private:
 	int LayerCount = 0;
 	int LayerSize = 0;
 	int InputSize = 0;
@@ -15,13 +15,18 @@ public:
 
 	void(*ActFunct)(float);
 	vector<vector<float>> weights;
-	vector<float>inputs;
+	vector<float>Inputs;
 	vector<vector<float>> nodes;
-	vector<float>outputs;
+	vector<float>Outputs;
+public:
 	void setinputs(vector<float> inputs);
+	//this function will reset the weights of the neural network to random you will have to retrain your network
 	void setLayerCount(int num);
+	//this function will reset the weights of the neural network to random you will have to retrain your network
 	void setLayerSize(int num);
+	//this function will not reset your weights
 	void setActFunct(void(*AFunct)(float));
+	//this function will change your weights to more accurate values please run multiple times for better accuracy
 	void train(vector<vector<float>> inputs,vector<vector<float>> CorrectOutputs);
 	void Run();
 	vector<float> getOutputs();

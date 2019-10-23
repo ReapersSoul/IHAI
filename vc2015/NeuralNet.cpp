@@ -77,19 +77,33 @@ void NeuralNet::setLayerCount(int num)
 	}
 
 	//weights reset
+
 	weights.resize(LayerCount + 2);
 
-	weights[0].resize(InputSize*nodes[0].size());
+	weights[0].resize(InputSize);
 
-	for (int i = 1; i < (LayerCount - 1); i++) {
-		weights.resize(nodes[i - 1].size()*nodes[i].size());
+	for (int j = 0; j < weights[0].size(); j++) {
+		weights[0][j].resize(nodes[0].size());
 	}
 
-	weights[weights.size()].resize(nodes[nodes.size()].size()*Outputs.size());
+	for (int i = 1; i < weights.size(); i++) {
+		weights[i].resize(nodes[i - 1].size());
+		for (int j = 0; j < weights[i].size(); j++) {
+			weights[i][j].resize(nodes[i].size());
+		}
+	}
+
+	weights[weights.size()].resize(nodes[nodes.size()].size());
+
+	for (int j = 0; j < weights[weights.size()].size(); j++) {
+		weights[weights.size()][j].resize(OutputSize);
+	}
 
 	for (int i = 0; i < weights.size(); i++) {
 		for (int j = 0; j < weights[i].size(); j++) {
-			weights[i][j] = randrange(-1, 1);
+			for (int l = 0; l < weights[i][j].size(); l++) {
+				weights[i][j][l] = randrange(-1, 1);
+			}
 		}
 	}
 
@@ -101,19 +115,33 @@ void NeuralNet::setLayerSize(int num)
 		nodes[i].resize(num);
 	}
 	//weights reset
+
 	weights.resize(LayerCount + 2);
 
-	weights[0].resize(InputSize*nodes[0].size());
+	weights[0].resize(InputSize);
 
-	for (int i = 1; i < (LayerCount - 1); i++) {
-		weights.resize(nodes[i - 1].size()*nodes[i].size());
+	for (int j = 0; j < weights[0].size(); j++) {
+		weights[0][j].resize(nodes[0].size());
 	}
 
-	weights[weights.size()].resize(nodes[nodes.size()].size()*Outputs.size());
+	for (int i = 1; i < weights.size(); i++) {
+		weights[i].resize(nodes[i - 1].size());
+		for (int j = 0; j < weights[i].size(); j++) {
+			weights[i][j].resize(nodes[i].size());
+		}
+	}
+
+	weights[weights.size()].resize(nodes[nodes.size()].size());
+
+	for (int j = 0; j < weights[weights.size()].size(); j++) {
+		weights[weights.size()][j].resize(OutputSize);
+	}
 
 	for (int i = 0; i < weights.size(); i++) {
 		for (int j = 0; j < weights[i].size(); j++) {
-			weights[i][j] = randrange(-1, 1);
+			for (int l = 0; l < weights[i][j].size(); l++) {
+				weights[i][j][l] = randrange(-1, 1);
+			}
 		}
 	}
 }

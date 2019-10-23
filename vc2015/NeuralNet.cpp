@@ -21,22 +21,36 @@ NeuralNet::NeuralNet(int inputSize,int outputsize, int LCount, int LSize, void(*
 
 	Outputs.resize(OutputSize);
 
+	//weights setup
+
 	weights.resize(LayerCount + 2);
 
-	weights[0].resize(InputSize*nodes[0].size());
+	weights[0].resize(InputSize);
 
-	for (int i = 1; i < (LayerCount - 1); i++) {
-		weights.resize(nodes[i-1].size()*nodes[i].size());
+	for (int j = 0; j < weights[0].size(); j++) {
+		weights[0][j].resize(nodes[0].size());
 	}
 
-	weights[weights.size()].resize(nodes[nodes.size()].size()*Outputs.size());
-
-	for (int i = 0; i < weights.size(); i++) {
+	for (int i = 1; i < weights.size(); i++) {
+		weights[i].resize(nodes[i-1].size());
 		for (int j = 0; j < weights[i].size(); j++) {
-			weights[i][j]= randrange(-1,1);
+			weights[i][j].resize(nodes[i].size());
 		}
 	}
 
+	weights[weights.size()].resize(nodes[nodes.size()].size());
+
+	for (int j = 0; j < weights[weights.size()].size(); j++) {
+		weights[weights.size()][j].resize(OutputSize);
+	}
+
+	for (int i = 0; i < weights.size(); i++) {
+		for (int j = 0; j < weights[i].size(); j++) {
+			for (int l = 0; l < weights[i][j].size(); l++) {
+				weights[i][j][l] = randrange(-1, 1);
+			}
+		}
+	}
 }
 
 NeuralNet::NeuralNet()
@@ -109,8 +123,26 @@ void NeuralNet::setActFunct(void(*AFunct)(float))
 	ActFunct = AFunct;
 }
 
-void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> CorrectOutputs)
+void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> CorrectOutputs,int itterations)
 {
+	for (int i = 0; i < itterations; i++) {
+		for (int j = 0; j < inputs.size(); j++) {
+
+			Inputs = inputs[j];
+			
+			for (int y = 0; y < nodes[0].size(); y++) {
+				for (int x = 0; x < Inputs.size(); x++) {
+
+
+				}
+			}
+
+
+
+			inputs[j]
+
+		}
+	}
 }
 
 void NeuralNet::Run()

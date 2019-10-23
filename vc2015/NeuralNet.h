@@ -14,7 +14,8 @@ private:
 	int OutputSize = 0;
 
 	void(*ActFunct)(float);
-	vector<vector<float>> weights;
+	vector<vector<vector<float>>> weights;
+	float bias;
 	vector<float>Inputs;
 	vector<vector<float>> nodes;
 	vector<float>Outputs;
@@ -26,8 +27,8 @@ public:
 	void setLayerSize(int num);
 	//this function will not reset your weights
 	void setActFunct(void(*AFunct)(float));
-	//this function will change your weights to more accurate values please run multiple times for better accuracy
-	void train(vector<vector<float>> inputs,vector<vector<float>> CorrectOutputs);
+	//this function will change your weights to more accurate values
+	void train(vector<vector<float>> inputs,vector<vector<float>> CorrectOutputs,int itterations);
 	void Run();
 	vector<float> getOutputs();
 

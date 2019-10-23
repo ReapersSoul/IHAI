@@ -83,6 +83,14 @@ void IHAIApp::setup()
 		.positions()
 		.colors(3)
 	);
+	for (int i = 0; i < ml.points.size(); i++) {
+		mesh.appendPosition(vec3(ml.points[i].posX*scale, ml.points[i].posY*scale, ml.points[i].posZ*scale));
+		mesh.appendColorRgb(col);
+	}
+
+	for (int i = 0; i < ml.faces.size(); i++) {
+		mesh.appendTriangle(ml.faces[i][0], ml.faces[i][1], ml.faces[i][2]);
+	}
 }
 
 void IHAIApp::mouseDown( MouseEvent event )
@@ -112,14 +120,7 @@ void IHAIApp::draw()
 	}*/
 
 	//draw mesh
-	for (int i = 0; i < ml.points.size(); i++) {
-		mesh.appendPosition(vec3(ml.points[i].posX*scale, ml.points[i].posY*scale, ml.points[i].posZ*scale));
-		mesh.appendColorRgb(col);
-	}
 
-	for (int i = 0; i < ml.faces.size(); i++) {
-		mesh.appendTriangle(ml.faces[i][0], ml.faces[i][1], ml.faces[i][2]);
-	}
 
 	gl::draw(mesh);
 

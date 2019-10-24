@@ -36,7 +36,7 @@ vector<float> NodeLayer::getNodes()
 	return nodes;
 }
 
-void NodeLayer::forwardProp()
+vector<float> NodeLayer::forwardProp()
 {
 
 	for (int i = 0; i < nodes.size(); i++) {

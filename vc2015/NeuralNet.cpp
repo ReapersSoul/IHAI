@@ -70,7 +70,17 @@ void NeuralNet::setActFunct(float(*AFunct)(float))
 void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> CorrectOutputs,int itterations)
 {
 	for (int i = 0; i < itterations; i++) {
-		for
+		//setup
+		Inputs.setNodes(inputs[i]);
+		Outputs.resizeLayer(CorrectOutputs[i].size());
+		//forward propigation
+		nodes[0].setNodes(Inputs.forwardProp());
+		for (int j = 1; j < nodes.size(); j++) {
+			nodes[j].setNodes(nodes[j - 1].forwardProp());
+		}
+		Outputs.setNodes(nodes[nodes.size()].forwardProp());
+		//back propigation
+
 	}
 }
 

@@ -30,7 +30,7 @@ public:
 
 	vector<float> getNodes();
 
-	void forwardProp();
+	vector<float> forwardProp();
 
 	void backProp(vector<float> CorrectOutputs);
 

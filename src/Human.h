@@ -12,6 +12,12 @@ public:
 	~Human();
 	vector<void*> LT_MEM;
 	vector<void*> ST_MEM;
+
+	NeuralNet visual;
+	NeuralNet auditory;
+	NeuralNet motor;
+
+
 	float hunger;
 	float air;
 	float water;

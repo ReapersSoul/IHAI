@@ -43,11 +43,7 @@ void NodeLayer::forwardProp()
 
 void NodeLayer::backProp(vector<float> CorrectOutputs)
 {
-	vector<float> nodeError;
-	for (int i = 0; i < nodes.size(); i++) {
-		nodeError.push_back(CorrectOutputs[i] - nodes[i]);
-	}
-	//weight error. how?
+	
 }
 
 NodeLayer::~NodeLayer()

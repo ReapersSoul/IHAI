@@ -173,10 +173,13 @@ void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> Correc
 			}
 			//nodes
 			for (int x = 1; x < nodes.size() - 1; x++) {
-				for (int y = 0; y < nodes[x-1].size(); y++) {
+				
+				for (int y = 0; y < nodes[x+1].size(); y++) {
+					float tmpval = 0;
 					for (int z = 0; z < nodes[x].size(); z++) {
-						nodes[x][z] = ActFunct(weights[x][y][z] * nodes[x - 1][y] + bias);
+						tmpval += (nodes[x][z] * weights[x][y][z] + bias);
 					}
+
 				}
 			}
 			//outputs

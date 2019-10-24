@@ -198,6 +198,7 @@
     <ClCompile Include="..\src\Mesh.cpp" />
     <ClCompile Include="..\src\Mesh_Point.cpp" />
     <ClCompile Include="NeuralNet.cpp" />
+    <ClCompile Include="NodeLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="..\src\Mesh.h" />
     <ClInclude Include="..\src\Mesh_Point.h" />
     <ClInclude Include="NeuralNet.h" />
+    <ClInclude Include="NodeLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <time.h>
+#include "NodeLayer.h"
 
 float randrange(float min, float max);
 float randrange(float min, float max);
@@ -10,17 +11,12 @@ using namespace std;
 class NeuralNet
 {
 private:
-	int LayerCount = 0;
-	int LayerSize = 0;
-	int InputSize = 0;
-	int OutputSize = 0;
 
+	int LayerSize;
 	float (*ActFunct)(float);
-	vector<vector<vector<float>>> weights;
-	float bias;
-	vector<float>Inputs;
-	vector<vector<float>> nodes;
-	vector<float>Outputs;
+	NodeLayer Inputs;
+	vector<NodeLayer> nodes;
+	NodeLayer Outputs;
 public:
 	void setinputs(vector<float> inputs);
 

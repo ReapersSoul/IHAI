@@ -26,6 +26,10 @@ public:
 
 	void setNodes(vector<float> vals);
 
+	void resizeLayer(int num);
+
+	vector<float> getNodes();
+
 	void forwardProp();
 
 	void backProp(vector<float> CorrectOutputs);

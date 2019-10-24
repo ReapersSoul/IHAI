@@ -26,6 +26,16 @@ void NodeLayer::setNodes(vector<float> vals)
 	nodes = vals;
 }
 
+void NodeLayer::resizeLayer(int num)
+{
+	nodes.resize(num);
+}
+
+vector<float> NodeLayer::getNodes()
+{
+	return nodes;
+}
+
 void NodeLayer::forwardProp()
 {
 

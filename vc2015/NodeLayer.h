@@ -7,9 +7,14 @@ class NodeLayer
 	float(*ActFunct)(float);
 	int index;
 	float bias;
-	vector<NodeLayer> & Layers;
+	NodeLayer * Layers;
 	vector<vector<float>> weights;
 	vector<float> nodes;
+	/*
+	may use error vector to allow 
+	comunication of errors beyween layers
+	*/
+
 public:
 	NodeLayer();
 
@@ -22,6 +27,8 @@ public:
 	void setNodes(vector<float> vals);
 
 	void forwardProp();
+
+	void backProp();
 
 	~NodeLayer();
 };

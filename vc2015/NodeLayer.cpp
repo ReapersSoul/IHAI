@@ -38,22 +38,22 @@ vector<float> NodeLayer::getNodes()
 
 vector<float> NodeLayer::forwardProp()
 {
-
+vector<float> tmp;
 	for (int i = 0; i < nodes.size(); i++) {
 		float tmpval = 0;
 		for (int j = 0; j < Layers[index + 1].nodes.size(); j++) {
-			tmpval += (weights[i][j] * nodes[j] + bias);
+			tmpval += (weights[i][j] * nodes[i] + bias);
 		}
-		Layers[index + 1].nodes[i] = tmpval;
+		tmp.pushback(tmpval);
 	}
-
-	//call forward prop on next layer?
-
+return tmp;
 }
 
 void NodeLayer::backProp(vector<float> CorrectOutputs)
 {
-	
+	for(int i=0; i<CorrectOutputs.size();i++){
+		
+	}
 }
 
 NodeLayer::~NodeLayer()

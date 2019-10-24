@@ -168,6 +168,11 @@ void Mesh::DrawBone()
 	//drawbone
 }
 
+void Mesh::DrawMesh()
+{
+	//draw mesh
+}
+
 float distFunct(int x, int y, int z, int x2, int y2, int z2)
 {
 	return pow((pow((x2 - x), 2) + pow((y2 - y), 2) + pow((z2 - z), 2)), .5);

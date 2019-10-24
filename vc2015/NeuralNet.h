@@ -3,6 +3,8 @@
 #include <time.h>
 
 float randrange(float min, float max);
+float randrange(float min, float max);
+int randrange(int min, int max);
 
 using namespace std;
 class NeuralNet

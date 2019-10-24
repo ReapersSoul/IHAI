@@ -22,5 +22,6 @@ public:
 	bool SaveMesh(string FileName);
 	void CreateBone();
 	void DrawBone();
+	void DrawMesh();
 };
 

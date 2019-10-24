@@ -3,6 +3,7 @@
 
 Human::Human()
 {
+	srand(time(0));
 	hunger = 0.0f;
 	air = 0.0f;
 	water = 0.0f;
@@ -10,6 +11,7 @@ Human::Human()
 	digestion = 0.0f;
 	FertilityResetCountDown = 0.0f;
 	Fertile = true;
+	sex = randrange(0, 1);
 }
 
 

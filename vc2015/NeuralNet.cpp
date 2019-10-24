@@ -206,3 +206,13 @@ float randrange(float min, float max)
 {
 	return min + (rand() * (float)(max - min) / RAND_MAX);
 }
+
+double randrange(double min, double max)
+{
+	return min + (rand() * (double)(max - min) / RAND_MAX);
+}
+
+int randrange(int min, int max)
+{
+	return min + (rand() * (int)(max - min) / RAND_MAX);
+}

@@ -2,7 +2,6 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/params/Params.h"
-#include "cinder/Arcball.h"
 
 #include <math.h>
 

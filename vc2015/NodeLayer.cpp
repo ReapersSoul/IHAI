@@ -28,22 +28,26 @@ void NodeLayer::setNodes(vector<float> vals)
 
 void NodeLayer::forwardProp()
 {
-	if (nodes[index - 1] != NULL) {
-		for (int i = 0; i < nodes.size(); i++) {
-			float tmpval = 0;
-			for (int j = 0; j < Layers[index - 1].nodes.size(); j++) {
-				tmpval += (weights[i][j] * Layers[index - 1].nodes[j] + bias);
-			}
-			nodes[i] = tmpval;
-		}
-		//call forward prop on next layer?
 
+	for (int i = 0; i < nodes.size(); i++) {
+		float tmpval = 0;
+		for (int j = 0; j < Layers[index + 1].nodes.size(); j++) {
+			tmpval += (weights[i][j] * nodes[j] + bias);
+		}
+		Layers[index + 1].nodes[i] = tmpval;
 	}
+
+	//call forward prop on next layer?
+
 }
 
-void NodeLayer::backProp()
+void NodeLayer::backProp(vector<float> CorrectOutputs)
 {
-
+	vector<float> nodeError;
+	for (int i = 0; i < nodes.size(); i++) {
+		nodeError.push_back(CorrectOutputs[i] - nodes[i]);
+	}
+	//weight error. how?
 }
 
 NodeLayer::~NodeLayer()

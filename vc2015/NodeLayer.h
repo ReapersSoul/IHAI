@@ -28,7 +28,7 @@ public:
 
 	void forwardProp();
 
-	void backProp();
+	void backProp(vector<float> CorrectOutputs);
 
 	~NodeLayer();
 };

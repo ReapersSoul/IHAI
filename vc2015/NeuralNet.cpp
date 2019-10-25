@@ -11,15 +11,15 @@ NeuralNet::NeuralNet(int inputSize,int outputsize, int LCount, int LSize, float(
 
 	Inputs.resizeLayer(inputSize);
 
-	nodes.resize(LCount);
+	Layers.resize(LCount);
 	for (int i = 0; i < LCount;i++) {
-		nodes[i].resizeLayer(LayerSize);
+		Layers[i].resizeLayer(LayerSize);
 	}
 
 	Outputs.resizeLayer(outputsize);
 
-	for (int i = 0; i < nodes.size(); i++) {
-		nodes[i].setIndex(i);
+	for (int i = 0; i < Layers.size(); i++) {
+		Layers[i].setIndex(i);
 	}
 
 	//weights setup
@@ -47,9 +47,9 @@ void NeuralNet::setOutputSize(int num)
 
 void NeuralNet::setLayerCount(int num)
 {
-	nodes.resize(num);
-	for (int i = 0; i < nodes.size(); i++) {
-		nodes[i].resizeLayer(LayerSize);
+	Layers.resize(num);
+	for (int i = 0; i < Layers.size(); i++) {
+		Layers[i].resizeLayer(LayerSize);
 	}
 
 	//weights reset
@@ -59,8 +59,8 @@ void NeuralNet::setLayerCount(int num)
 void NeuralNet::setLayerSize(int num)
 {
 	LayerSize = num;
-	for (int i = 0; i < nodes.size(); i++) {
-		nodes[i].resizeLayer(num);
+	for (int i = 0; i < Layers.size(); i++) {
+		Layers[i].resizeLayer(num);
 	}
 	//weights reset
 
@@ -71,29 +71,38 @@ void NeuralNet::setActFunct(float(*AFunct)(float))
 	ActFunct = AFunct;
 }
 
-void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> CorrectOutputs,int itterations)
+void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> CorrectOutputs, int itterations)
 {
 	for (int i = 0; i < itterations; i++) {
 		//setup
 		Inputs.setNodes(inputs[i]);
 		Outputs.resizeLayer(CorrectOutputs[i].size());
 		//forward propigation
-		nodes[0].setNodes(Inputs.forwardProp());
-		for (int j = 1; j < nodes.size(); j++) {
-			nodes[j].setNodes(nodes[j - 1].forwardProp());
+		Layers[0].setNodes(Inputs.forwardProp(Layers[0]));
+		for (int j = 1; j < Layers.size(); j++) {
+			Layers[j].setNodes(Layers[j - 1].forwardProp(Layers[j]));
 		}
-		Outputs.setNodes(nodes[nodes.size()].forwardProp());
+		Outputs.setNodes(Layers[Layers.size()].forwardProp(Outputs));
 		//back propigation
 
+		vector<vector<float>> tempWeights;
+
+		Outputs.backProp(Layers[Layers.size()], CorrectOutputs[i]);
 
 
-		for (int j = nodes.size(); j > -1; j--) {
+		for (int j = Layers.size(); j > -1; j--) {
 			vector<float> temp;
-			temp = nodes[j].getNodes();
-			nodes[j].forwardProp();
-			nodes[j].backProp(temp);
-		}
+			temp = Layers[j].getNodes();
+			Layers[j].setWeights(tempWeights);
+			Layers[j].forwardProp(Layers[j + 1]);
+			if (j != 0) {
+				tempWeights = Layers[j].backProp(Layers[j - 1], temp);
+			}
+			else if (j = 0) {
+				Inputs.setWeights(Layers[j].backProp(Inputs, temp));
+			}
 
+		}
 	}
 }
 

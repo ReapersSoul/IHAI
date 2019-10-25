@@ -34,6 +34,14 @@ void NodeLayer::setNodes(vector<float> vals)
 	nodes = vals;
 }
 
+void setWeights(vector<vector<float>> wts){
+	for(int i=0; i<weights.size();i++){
+		for (int j = 0; j < weights[i]; j++) {
+			weights[i][j]=wts[i][j];
+		}
+	}
+}
+
 void NodeLayer::resizeLayer(int num)
 {
 	nodes.resize(num);
@@ -48,12 +56,12 @@ int NodeLayer::getSize(){
 	return nodes.size();
 }
 
-vector<float> NodeLayer::forwardProp()
+vector<float> NodeLayer::forwardProp(NodeLayer NL)
 {
 vector<float> tmp;
 	for (int i = 0; i < nodes.size(); i++) {
 		float tmpval = 0;
-		for (int j = 0; j < Layers[index + 1].nodes.size(); j++) {
+		for (int j = 0; j < NL.nodes.size(); j++) {
 			tmpval += (weights[i][j] * nodes[i] + bias);
 		}
 		tmp.push_back(tmpval);
@@ -61,16 +69,16 @@ vector<float> tmp;
 return tmp;
 }
 
-void NodeLayer::backProp(vector<float> CorrectOutputs)
+vector<vector<float>> NodeLayer::backProp(NodeLayer NL,vector<float> CorrectOutputs)
 {
-	if (index != 0) {
+	vector<vector<float>> RTRNWeights;
 		for (int i = 0; i < CorrectOutputs.size(); i++) {
 			float error = nodes[i] - CorrectOutputs[i];
-			for (int j = 0; j < Layers[index - 1].getSize(); j++) {
-				weights[j][i] = Layers[index - 1].weights[j][i] * error;
+			for (int j = 0; j < NL.getSize(); j++) {
+				RTRNWeights[j][i] = NL.weights[j][i] * error;
 			}
 		}
-	}
+		return RTRNWeights;
 }
 
 NodeLayer::~NodeLayer()

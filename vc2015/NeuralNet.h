@@ -15,7 +15,7 @@ private:
 	int LayerSize;
 	float (*ActFunct)(float);
 	NodeLayer Inputs;
-	vector<NodeLayer> nodes;
+	vector<NodeLayer> Layers;
 	NodeLayer Outputs;
 public:
 	void setinputs(vector<float> inputs);

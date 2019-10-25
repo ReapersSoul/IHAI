@@ -28,15 +28,17 @@ public:
 
 	void setNodes(vector<float> vals);
 
+	void setWeights(vector<vector<float>> wts);
+
 	void resizeLayer(int num);
 
 	vector<float> getNodes();
 
 	int getSize();
 
-	vector<float> forwardProp();
+	vector<float> forwardProp(NodeLayer NL);
 
-	void backProp(vector<float> CorrectOutputs);
+	vector<vector<float>> backProp(NodeLayer NL,vector<float> CorrectOutputs);
 
 	~NodeLayer();
 };

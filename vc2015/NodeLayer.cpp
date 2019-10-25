@@ -7,14 +7,22 @@ NodeLayer::NodeLayer()
 
 }
 
+void NodeLayer::setIndex(int i)
+{
+	index = i;
+}
+
 void NodeLayer::SetBias(float num)
 {
 	bias = num;
 }
 
 
-void NodeLayer::setLayerRef(vector<NodeLayer>* Lyrs)
+void NodeLayer::setLayerRef(vector<NodeLayer> Lyrs)
 {
+	for (int i = 0; i < Lyrs.size(); i++) {
+		Layers[i] = Lyrs[i];
+	}
 }
 
 void NodeLayer::setActFunct(float(*AFunct)(float))
@@ -36,6 +44,10 @@ vector<float> NodeLayer::getNodes()
 	return nodes;
 }
 
+int NodeLayer::getSize(){
+	return nodes.size();
+}
+
 vector<float> NodeLayer::forwardProp()
 {
 vector<float> tmp;
@@ -44,15 +56,20 @@ vector<float> tmp;
 		for (int j = 0; j < Layers[index + 1].nodes.size(); j++) {
 			tmpval += (weights[i][j] * nodes[i] + bias);
 		}
-		tmp.pushback(tmpval);
+		tmp.push_back(tmpval);
 	}
 return tmp;
 }
 
 void NodeLayer::backProp(vector<float> CorrectOutputs)
 {
-	for(int i=0; i<CorrectOutputs.size();i++){
-		
+	if (index != 0) {
+		for (int i = 0; i < CorrectOutputs.size(); i++) {
+			float error = nodes[i] - CorrectOutputs[i];
+			for (int j = 0; j < Layers[index - 1].getSize(); j++) {
+				weights[j][i] = Layers[index - 1].weights[j][i] * error;
+			}
+		}
 	}
 }
 

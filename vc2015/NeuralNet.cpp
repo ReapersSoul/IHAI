@@ -18,6 +18,10 @@ NeuralNet::NeuralNet(int inputSize,int outputsize, int LCount, int LSize, float(
 
 	Outputs.resizeLayer(outputsize);
 
+	for (int i = 0; i < nodes.size(); i++) {
+		nodes[i].setIndex(i);
+	}
+
 	//weights setup
 
 }
@@ -59,7 +63,7 @@ void NeuralNet::setLayerSize(int num)
 		nodes[i].resizeLayer(num);
 	}
 	//weights reset
-	
+
 }
 
 void NeuralNet::setActFunct(float(*AFunct)(float))
@@ -80,6 +84,15 @@ void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> Correc
 		}
 		Outputs.setNodes(nodes[nodes.size()].forwardProp());
 		//back propigation
+
+
+
+		for (int j = nodes.size(); j > -1; j--) {
+			vector<float> temp;
+			temp = nodes[j].getNodes();
+			nodes[j].forwardProp();
+			nodes[j].backProp(temp);
+		}
 
 	}
 }

@@ -3,7 +3,10 @@
 #include "emotion.h"
 #include "../vc2015/NeuralNet.h"
 #include <time.h>
+#include "cinder/log.h"
 using namespace std;
+
+float ActFunct(float val);
 
 class Human
 {
@@ -13,9 +16,7 @@ public:
 	vector<void*> LT_MEM;
 	vector<void*> ST_MEM;
 
-	NeuralNet visual;
-	NeuralNet auditory;
-	NeuralNet motor;
+	NeuralNet brain;
 
 
 	float hunger;

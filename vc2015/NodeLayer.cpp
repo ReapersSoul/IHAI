@@ -4,7 +4,6 @@
 
 NodeLayer::NodeLayer()
 {
-
 }
 
 void NodeLayer::setIndex(int i)
@@ -34,12 +33,8 @@ void NodeLayer::setNodes(vector<float> vals)
 	nodes = vals;
 }
 
-void setWeights(vector<vector<float>> wts){
-	for(int i=0; i<weights.size();i++){
-		for (int j = 0; j < weights[i]; j++) {
-			weights[i][j]=wts[i][j];
-		}
-	}
+void NodeLayer::setWeights(vector<vector<float>> wts){
+	weights = wts;
 }
 
 void NodeLayer::resizeLayer(int num)

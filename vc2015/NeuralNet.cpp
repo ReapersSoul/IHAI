@@ -101,13 +101,17 @@ void NeuralNet::train(vector<vector<float>> inputs, vector<vector<float>> Correc
 			else if (j = 0) {
 				Inputs.setWeights(Layers[j].backProp(Inputs, temp));
 			}
-
 		}
 	}
 }
 
 void NeuralNet::Run()
 {
+	Layers[0].setNodes(Inputs.forwardProp(Layers[0]));
+	for (int j = 1; j < Layers.size(); j++) {
+		Layers[j].setNodes(Layers[j - 1].forwardProp(Layers[j]));
+	}
+	Outputs.setNodes(Layers[Layers.size()].forwardProp(Outputs));
 }
 
 vector<float> NeuralNet::getOutputs()

@@ -2,10 +2,12 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/params/Params.h"
+#include "cinder/log.h"
 
 #include <math.h>
 
 #include "Mesh.h"
+#include "Human.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -21,6 +23,10 @@ class IHAIApp : public App {
 	void mouseDrag(MouseEvent event) override;
 	void update() override;
 	void draw() override;
+
+	Human H;
+
+	/*
 	//cinder stuff
 	params::InterfaceGlRef		mParams;
 	CameraPersp		mCam;
@@ -30,40 +36,46 @@ class IHAIApp : public App {
 	vec3 lookingAt=vec3(0);
 	vec3 camPos = vec3(10,10,10);
 	//mesh
-	TriMesh mesh;
+	TriMesh mesh;*/
 };
 
 void IHAIApp::setup()
 {
+	/*
+	log::makeLogger<log::LoggerFile>("/tmp/cinder/cinder.log");
 	ml.LoadMesh("C:/Users/Trevor/Desktop/untitled.ALobj");
 	for (int i = 0; i < ml.bones.size(); i++) {
-		cout << "bone #" << i << ": " << endl;
-		cout << ml.bones[i].posX << endl;
-		cout << ml.bones[i].posY << endl;
-		cout << ml.bones[i].posZ << endl;
-		cout << ml.bones[i].xRot << endl;
-		cout << ml.bones[i].yRot << endl;
-		cout << ml.bones[i].zRot << endl;
-		cout << ml.bones[i].HasParent << endl;
-		cout << ml.bones[i].parent << endl;
+		CI_LOG_D("bone #");
+		CI_LOG_D(i);
+		CI_LOG_D("\n");
+		CI_LOG_D(ml.bones[i].posX);
+		CI_LOG_D(ml.bones[i].posY);
+		CI_LOG_D(ml.bones[i].posZ);
+		CI_LOG_D(ml.bones[i].xRot);
+		CI_LOG_D(ml.bones[i].yRot);
+		CI_LOG_D(ml.bones[i].zRot);
+		CI_LOG_D(ml.bones[i].HasParent);
+		CI_LOG_D(ml.bones[i].parent);
 	}
 	for (int i = 0; i < ml.points.size(); i++) {
-		cout << "living point #" << i << ": " << endl;
-		cout << ml.points[i].posX << endl;
-		cout << ml.points[i].posY << endl;
-		cout << ml.points[i].posZ << endl;
-		cout << ml.points[i].pain << endl;
-		cout << ml.points[i].pleasure << endl;
-		cout << ml.points[i].presure << endl;
-		cout << ml.points[i].Parent_Bone << endl;
-		cout << ml.points[i].weight << endl;
+		CI_LOG_D("living point #" << i << ": ");
+		CI_LOG_D(ml.points[i].posX);
+		CI_LOG_D(ml.points[i].posY);
+		CI_LOG_D(ml.points[i].posZ);
+		CI_LOG_D(ml.points[i].pain);
+		CI_LOG_D(ml.points[i].pleasure);
+		CI_LOG_D(ml.points[i].presure);
+		CI_LOG_D(ml.points[i].Parent_Bone);
+		CI_LOG_D(ml.points[i].weight);
 	}
 	for (int i = 0; i < ml.faces.size(); i++) {
-		cout << "face #" << i << ": ";
+		CI_LOG_D("face #");
+		CI_LOG_D(i);
+		CI_LOG_D("\n");
 		for (int j = 0; j < ml.faces[i].size(); j++) {
-			cout << ml.faces[i][j] << " ";
+			CI_LOG_D(ml.faces[i][j]);
 		}
-		cout << endl;
+		CI_LOG_D("\n");
 	}
 	//cinder stuff
 		//params stuff
@@ -90,10 +102,12 @@ void IHAIApp::setup()
 	for (int i = 0; i < ml.faces.size(); i++) {
 		mesh.appendTriangle(ml.faces[i][0], ml.faces[i][1], ml.faces[i][2]);
 	}
+	*/
 }
 
 void IHAIApp::mouseDown( MouseEvent event )
 {
+	H.run();
 }
 
 void IHAIApp::mouseDrag(MouseEvent event)
@@ -102,21 +116,22 @@ void IHAIApp::mouseDrag(MouseEvent event)
 
 void IHAIApp::update()
 {
-	mCam.lookAt(camPos, lookingAt);
+	//mCam.lookAt(camPos, lookingAt);
 }
 
 void IHAIApp::draw()
 {
+	/*
 	gl::clear();
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
 
 	gl::setMatrices(mCam);
 
-	/*for (int i = 0; i < ml.points.size(); i++) {
+	for (int i = 0; i < ml.points.size(); i++) {
 		vec3 tmpvec = vec3(ml.points[i].posX, ml.points[i].posY, ml.points[i].posZ);
 		gl::drawSphere(tmpvec* scale, radius, segments);
-	}*/
+	}
 
 	//draw mesh
 
@@ -124,6 +139,8 @@ void IHAIApp::draw()
 	gl::draw(mesh);
 
 	mParams->draw();
+	*/
+
 }
 
 CINDER_APP( IHAIApp, RendererGl )
